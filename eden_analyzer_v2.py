@@ -165,6 +165,7 @@ class MainWindow(Toplevel):
                     nodeLocations,nodeNames,inputfile=self.splitMSFile(inputfile)
                 elif infileFormat=="name_ms":
                     nodeNames,inputfile=self.splitMSFile(inputfile,locations=False)
+                    nodeLocations=None
                 else:
                     nodeLocations,nodeNames=None,None
             except SyntaxError,e:
@@ -382,7 +383,7 @@ class MainWindow(Toplevel):
             matrixtype=0 # type 0 : distance matrix
 
             #if names and locations given to nodes, add locations to the network
-            if infileFormat!="ms":
+            if infileFormat=="loc_name_ms": #this is the only format with location data
                 netext.addNodeProperty(m,"location")
                 for i,nodeName in enumerate(nodeNames):
                     if nodeName in m:
